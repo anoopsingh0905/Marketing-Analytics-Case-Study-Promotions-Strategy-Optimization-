@@ -1,4 +1,4 @@
-
+# DDL STATEMENT
 /*
 creating database and the tables in bronze schema
 */
@@ -108,5 +108,88 @@ CREATE TABLE bronze.referral_promo_code (
     max_spending_month INT
 );
 
+# LOADING DATA IN BRONZE LAYER
+
+/*
+=======================================================================
+Stored Procedure : Load Bronze Layer
+=======================================================================
+Script Purpose : 
+  This stored procedure load the data into bronze schema from external csv files.
 
 
+This perfrom 2 actions
+  1. first truncate bronze tables 
+  2. Loading the data in Bronze tables. 
+  
+
+--inseritng the values into the tables using bulk insert
+  */
+
+CREATE OR ALTER PROCEDURE bronze.load_table
+as
+BEGIN
+    
+    TRUNCATE TABLE bronze.affiliates
+    BULK INSERT bronze.affiliates
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_affiliates1.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    TRUNCATE TABLE bronze.partnerships
+    BULK INSERT bronze.partnerships
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_partnerships.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    TRUNCATE TABLE bronze.referral
+    BULK INSERT bronze.referral
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_referral.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+
+    --inserting values into promotion metadata tables
+    TRUNCATE TABLE bronze.affiliates_promo_code
+    BULK INSERT bronze.affiliates_promo_code
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_affiliates_promo_code.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    TRUNCATE TABLE bronze.partnerships_promo_code
+    BULK INSERT bronze.partnerships_promo_code
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_partnerships_promo_code.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    TRUNCATE TABLE bronze.referral_promo_code
+    BULK INSERT bronze.referral_promo_code
+    FROM 'D:\TIDE ASSIGNMENT\promotions_strategy_datasets_referral_promo_code.csv'
+    WITH (
+        FORMAT = 'CSV',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+END
+exec bronze.load_table
