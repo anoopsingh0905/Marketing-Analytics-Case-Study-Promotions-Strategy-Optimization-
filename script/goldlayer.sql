@@ -492,7 +492,35 @@ select
 			order by
 			total_revenue DESC
   
--- Top 5 and Bottom 5 promo code and channel detail wise total_revenue / top and bottom analyssi
+---- Top 10 revenue based on channel and promo code wise
+/*
+S.No	Channel		 Promo_Code			Total_Member	Total_Revenue_45_Daya	Total_AVG_45_Daya	Rank
+1		Partnership	 REFER75			561				8733.2					15.567201			1
+2		Referral	 MSM5FREE			284				8717.7					30.696126			2
+3		Referral	 MONEY5FREE			257				6101.5					23.741245			3
+4		Partnership	 MTA22				599				4678.8					7.811018			4
+5		Referral	 6FREEBUSINESS		126				2622.1					20.810317			5
+6		Partnership	 MADE_SIMPLE		140				1900.1					13.572142			6
+7		Partnership	 REFORM				131				1428.1					10.901526			7
+8		Partnership	 BUSINESSTOOLBOX	55				870.5					15.827272			8
+9		Affiliate	 XMAS22				78				813.2					10.425641			9
+10		Affiliate	 UBERLDN50FM		159				633.6					3.984905			10
+
+
+-- Top 5 and Bottom 5 promo code and channel detail wise total_revenue / top and bottom analysis
+S.No	Channel			Promo_Code		Total_Member	Total_Revenue_45_Days	Total_AVG_45_Days	Rank
+1		Partnership		REFER75			561				8733.2					15.567201			1
+2		Referral		MSM5FREE		284				8717.7					30.696126			2
+3		Referral		MONEY5FREE		257				6101.5					23.741245			3
+4		Partnership		MTA22			599				4678.8					7.811018			4
+5		Referral		6FREEBUSINESS	126				2622.1					20.810317			5
+6		Partnership		WEBBLES			1				0.4						0.4					131
+7		Partnership		ULTIMATEFINANCE	1				0.4						0.4					132
+8		Partnership		WORKLIFE		1				0.2						0.2					133
+9		Partnership		IPSE			1				0.2						0.2					134
+10		Partnership		HYSONS			1				0						0					135
+
+*/
 select 
 * from
 (
