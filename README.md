@@ -103,18 +103,5 @@ SQL Server
 VS Code
 GitHub
 
-## 📁 Repository Structure (Suggested)
-├── data/
-│   ├── raw/
-│   └── processed/
-├── notebooks/
-│   ├── EDA.ipynb
-│   └── Analysis.ipynb
-├── sql/
-│   └── table_creation.sql
-├── visuals/
-├── README.md
-
-✅ Final Note
-
+## ✅ Final Note
 This project demonstrates end-to-end analytical thinking, from raw data understanding to business-driven insights and strategic recommendations. It is designed to reflect real-world marketing analytics challenges and decision-making scenarios.
