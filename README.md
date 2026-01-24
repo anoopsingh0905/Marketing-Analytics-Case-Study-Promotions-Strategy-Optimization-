@@ -17,7 +17,7 @@ The analysis is based on past member performance, revenue generation, activity s
 ## 📂 Datasets Description
 
 The analysis uses six CSV files, grouped as follows:
-1️⃣ Channel Performance Data
+# 1️⃣ Channel Performance Data
 affiliates.csv
 partnerships.csv
 referral.csv
@@ -30,7 +30,7 @@ industry_class: Member’s industry category
 active_last_7_days: Member activity indicator (as of 15 March 2023)
 revenue_1st_45_days: Net revenue generated in the first 45 days
 
-##2️⃣ Promotion Metadata
+# 2️⃣ Promotion Metadata
 affiliates_promo_code.csv
 partnerships_promo_code.csv
 referral_promo_code.csv
