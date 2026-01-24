@@ -47,7 +47,7 @@ max_spending_month: Spending time window
 
 ## 🏗️ Data Architecture
 The project follows a layered analytics architecture to ensure scalability, clarity, and analytical accuracy.
-<img width="200" height="600" alt="Screenshot 2026-01-24 185621" src="https://github.com/user-attachments/assets/0c5831af-864e-4e68-8f09-33509d7d9845" />
+<img width="300" height="600" alt="Screenshot 2026-01-24 185621" src="https://github.com/user-attachments/assets/0c5831af-864e-4e68-8f09-33509d7d9845" />
 
 🔹 Layer Details
 1. Raw Data Layer
