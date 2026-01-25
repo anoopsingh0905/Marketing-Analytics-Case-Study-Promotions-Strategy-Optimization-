@@ -581,3 +581,82 @@ SELECT
 FROM promo_pivot
 ORDER BY Channel, promo_code;
 
+--detection of over incentive promotion
+
+WITH promo_incentive_analysis AS (
+	SELECT
+		Channel,
+		promo_code,
+		member_incentive_amount,
+		AVG(revenue_1st_45_days) AS avg_revenue_45_days,
+		COUNT(member_id) AS total_members
+	FROM gold.consolidated_channel_analysis
+	GROUP BY Channel, promo_code, member_incentive_amount
+)
+SELECT
+	Channel,
+	promo_code,
+	member_incentive_amount,
+	avg_revenue_45_days,
+	total_members,
+	CASE
+		WHEN member_incentive_amount > avg_revenue_45_days THEN 'Over-Incentivized'
+		WHEN member_incentive_amount < avg_revenue_45_days THEN 'Incentivized'
+		ELSE 'Adequately Incentivized'
+	END AS incentive_evaluation
+	FROM promo_incentive_analysis
+	WHERE member_incentive_amount < avg_revenue_45_days
+	ORDER BY Channel, promo_code;
+	-- End of Script
+
+--Channel-wise guidance on optimal incentive levels
+
+WITH channel_incentive_guidance AS (
+	SELECT
+		Channel,
+		promo_code,
+		member_incentive_amount,
+		AVG(revenue_1st_45_days) AS avg_revenue_45_days,
+		COUNT(member_id) AS total_members
+	FROM gold.consolidated_channel_analysis
+	GROUP BY Channel, promo_code, member_incentive_amount
+)
+SELECT
+	Channel,
+	promo_code,
+	member_incentive_amount,
+	avg_revenue_45_days,
+	total_members,
+	CASE
+		WHEN member_incentive_amount < avg_revenue_45_days * 0.8 THEN 'Consider Increasing Incentive'
+		WHEN member_incentive_amount > avg_revenue_45_days * 1.2 THEN 'Consider Decreasing Incentive'
+		ELSE 'Incentive Level Appropriate'
+	END AS incentive_guidance
+	FROM channel_incentive_guidance
+	ORDER BY Channel, promo_code;
+
+--Strategic recommendations to improve promotion governance and controls
+WITH promo_performance AS (
+	SELECT
+		Channel,
+		promo_code,
+		member_incentive_amount,
+		AVG(revenue_1st_45_days) AS avg_revenue_45_days,
+		COUNT(member_id) AS total_members
+	FROM gold.consolidated_channel_analysis
+	GROUP BY Channel, promo_code, member_incentive_amount
+)
+SELECT
+	Channel,
+	promo_code,
+	member_incentive_amount,
+	avg_revenue_45_days,
+	total_members,
+	CASE
+		WHEN member_incentive_amount > avg_revenue_45_days THEN 'Review Incentive Structure'
+		WHEN total_members < 10 THEN 'Increase Promotion Awareness'
+		ELSE 'Maintain Current Strategy'
+	END AS strategic_recommendation
+	FROM promo_performance
+	ORDER BY Channel, promo_code;
+	-- End of Script
