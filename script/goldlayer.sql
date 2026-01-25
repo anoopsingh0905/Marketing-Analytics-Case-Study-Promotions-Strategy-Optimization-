@@ -547,5 +547,37 @@ WHERE revenue_rank <= 5 OR revenue_rank > (SELECT MAX(revenue_rank) - 5 FROM
 	GROUP BY channel,promo_code
 )AS subquery)
 
+-- Channel and Promo code wise active vs inactive members analysis
 
+WITH promo_activity_summary AS (
+    SELECT
+        Channel,
+        promo_code,
+        active_last_7_days,
+        COUNT(member_id) AS total_members,
+        SUM(revenue_1st_45_days) AS total_revenue_45_days,
+        ROUND(AVG(revenue_1st_45_days), 2) AS avg_revenue_45_days
+    FROM gold.consolidated_channel_analysis
+    GROUP BY Channel, promo_code, active_last_7_days
+),
+promo_pivot AS (
+    SELECT
+        Channel,
+        promo_code,
+        SUM(CASE WHEN active_last_7_days = 1 THEN total_members ELSE 0 END) AS active_members,
+        SUM(CASE WHEN active_last_7_days = 0 THEN total_members ELSE 0 END) AS inactive_members,
+        SUM(CASE WHEN active_last_7_days = 1 THEN total_revenue_45_days ELSE 0 END) AS active_revenue,
+        SUM(CASE WHEN active_last_7_days = 0 THEN total_revenue_45_days ELSE 0 END) AS inactive_revenue
+    FROM promo_activity_summary
+    GROUP BY Channel, promo_code
+)
+SELECT
+    Channel,
+    promo_code,
+    active_members + inactive_members AS total_members,
+    active_revenue + inactive_revenue AS total_revenue_45_days,
+    ROUND(active_revenue * 100.0 / NULLIF(active_revenue + inactive_revenue, 0), 2) AS active_revenue_pct,
+    ROUND(inactive_revenue * 100.0 / NULLIF(active_revenue + inactive_revenue, 0), 2) AS inactive_revenue_pct
+FROM promo_pivot
+ORDER BY Channel, promo_code;
 
