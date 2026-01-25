@@ -93,9 +93,18 @@ Insights are presented using clear charts and summaries, designed for a non-tech
 
 ## 💡 Key Outcomes (High Level)
 1. Identification of best-performing promotions by channel
-2. Detection of over-incentivized promotions with poor returns
-3. Channel-wise guidance on optimal incentive levels
-4. Strategic recommendations to improve promotion governance and controls
+   <img width="1358" height="591" alt="top20_best_performing" src="https://github.com/user-attachments/assets/33541c17-8fcd-4498-a5cf-f64da2476ecf" />
+
+
+3. Detection of over-incentivized promotions with poor returns
+   <img width="1083" height="449" alt="OVER-INCENTIVE-PROMO-CODE" src="https://github.com/user-attachments/assets/7d90cb95-09a5-4917-be4e-ce502ee40dca" />
+
+5. Channel-wise guidance on optimal incentive levels
+   <img width="1160" height="430" alt="CHANNEL-WISE-GUIDANCE" src="https://github.com/user-attachments/assets/9da3b108-f43c-43ae-8757-425fe2ac43ef" />
+
+   
+7. Strategic recommendations to improve promotion governance and controls
+   <img width="1134" height="899" alt="STRATEGIC-RECOM" src="https://github.com/user-attachments/assets/17c6bd82-5f37-4ece-9a62-9d5c469528fb" />
 
 
 ## 🛠️ Tools & Technologies
